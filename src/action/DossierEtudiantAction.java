@@ -31,7 +31,7 @@ public class DossierEtudiantAction {
 	private static final String CATEGORIE=Categories.Autre.toString();
 	private static final String FORMAT ="format";
 	private static Date dateDepotFichier=null;
-	private static String pathDossierAdmission=null;
+	private static ArrayList<String>pathDossierAdmission=new ArrayList<>();
 
 	public static boolean creeDossierEtudiantConnecte(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
@@ -81,7 +81,6 @@ public class DossierEtudiantAction {
 						cree = false;
 					}
 					String strDirectoy ="c:\\dossiers_etudiants_etrangers\\"+prenom+"_"+nom+"_"+DossierEtudiantManager.id_etudiant+"\\"+ADMISSION;
-					pathDossierAdmission=strDirectoy;
 					// Create one directory
 					boolean success = (new File(strDirectoy)).mkdirs();
 					if (success) {
@@ -105,6 +104,8 @@ public class DossierEtudiantAction {
 					} 
 					String fileName = new File(item.getName()).getName();
 					String filePath = strDirectoy+"\\" + fileName;
+					
+					pathDossierAdmission.add(filePath);
 
 					File storeFile = new File(filePath);
 					// saves the file on disk

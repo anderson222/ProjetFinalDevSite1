@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import services.ConnecteurBD;
 
@@ -50,17 +51,21 @@ public class DossierEtudiantManager {
 		}
 	}
 
-	public static void ajouterFichier(int id_dossier_etudiant, String path,String dossier_contenant,String categorie,String format) {
+	public static void ajouterFichier(int id_dossier_etudiant, ArrayList<String> path,String dossier_contenant,String categorie,String format) {
 		PreparedStatement ps=ConnecteurBD.getPs(queryAjouterFichier);
 
 		try {
-			ps.setInt(1, id_dossier_etudiant);
-			ps.setString(2, path);
-			ps.setString(3, dossier_contenant);
-			ps.setString(4, categorie);
-			ps.setString(5, format);
-		    //ps.setDate(6,date);
-
+			
+			
+			for (String item : path) {
+				ps.setInt(1, id_dossier_etudiant);
+				ps.setString(2, item);
+				ps.setString(3, dossier_contenant);
+				ps.setString(4, categorie);
+				ps.setString(5, format);
+				//ps.setDate(6,date);
+			}
+		
 			ps.executeUpdate();
 
 			
