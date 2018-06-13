@@ -103,7 +103,7 @@ $.fn.fileUploader = function (filesToUpload, sectionIdentifier) {
         	 $.ajax({
              	type: "POST",
                  enctype: 'multipart/form-data',
-                 url: "http://localhost:8080/ProjetFinalSite1/SoumettreDossierEtudiantServlet",
+                 url: "http://localhost:8080/Projet/SoumettreDossierEtudiantServlet",
                  data: formData,
                  processData: false,
                  contentType: false,
