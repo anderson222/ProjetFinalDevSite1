@@ -11,6 +11,9 @@ import services.ConnecteurBD;
 public class DossierEtudiantManager {
 
 	public static int id_etudiant;
+	
+		
+	
 
 	/************* Queries *********/
 	private static String queryAjouterDossierEtudiant = "insert into dossier_etudiant (prenom, nom, courriel) values (?, ?, ?);";
@@ -43,4 +46,6 @@ public class DossierEtudiantManager {
 			e.printStackTrace();
 		}
 	}
+
+	
 }

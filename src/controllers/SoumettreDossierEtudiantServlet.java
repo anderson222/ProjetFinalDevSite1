@@ -37,22 +37,15 @@ public class SoumettreDossierEtudiantServlet extends HttpServlet {
 
 		String	urlRetour="demande_admission.jsp";
 	
-		
-		
-
-		if(DossierEtudiantAction.creeDossierEtudiantConnecte(request)){
-			
-			
-			urlRetour="confirmation.jsp";
-			
-			
-		
+		if(DossierEtudiantAction.creeDossierEtudiantConnecte(request, response)){
+						
+			urlRetour="confirmation.jsp";		
 			
 		}else{
 			
 		}
 		
-		request.getRequestDispatcher(urlRetour).include(request, response);
+		request.getRequestDispatcher(urlRetour).forward(request, response);
 		}
 
 }

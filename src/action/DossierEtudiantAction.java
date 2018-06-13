@@ -2,11 +2,13 @@ package action;
 
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -22,31 +24,34 @@ public class DossierEtudiantAction {
 	private static String nom = null;
 	private static String courriel = null;
 	
-	public static boolean creeDossierEtudiantConnecte(HttpServletRequest request) {
+	public static boolean creeDossierEtudiantConnecte(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		// DossierEtudiant de = DossierEtudiantManager.creeDossierEtudiant();
 		boolean reussi = false;
+		boolean cree = true;
 		choix_programmes = new ArrayList<String>();
 		choix_sessions = new ArrayList<String>();
+		
+			
 		ServletFileUpload sfu = new ServletFileUpload(new DiskFileItemFactory());
 		try {
-
+			
 			List formItems = sfu.parseRequest(request);
 			Iterator it = formItems.iterator();
 			while (it.hasNext()) {
 				FileItem item = (FileItem) it.next();
 				
 				if (item.isFormField()) {
-					if ("champ_prenom".equals(item.getFieldName())) {
+					if ("prenom".equals(item.getFieldName())) {
 						prenom = item.getString();
 						request.setAttribute("prenom", prenom);
 					}
 
-					if ("champ_nom".equals(item.getFieldName())) {
+					if ("nom".equals(item.getFieldName())) {
 						nom = item.getString();
 						request.setAttribute("nom", nom);
 					}
-					if ("champ_courriel".equals(item.getFieldName())) {
+					if ("courriel".equals(item.getFieldName())) {
 						courriel = item.getString();
 						request.setAttribute("courriel", courriel);
 					}
@@ -62,15 +67,26 @@ public class DossierEtudiantAction {
 					}
 					
 				} else {
+					if(cree) {
+						ajouterDossierEtudiant(prenom, nom, courriel, choix_programmes, choix_sessions );
+						cree = false;
+					}
+					String strDirectoy ="c:\\Fichier_Admission\\"+prenom+"_"+nom+"_"+DossierEtudiantManager.id_etudiant+"\\Admission";
+				    // Create one directory
+				    boolean success = (new File(strDirectoy)).mkdirs();
+				    if (success) {
+				      System.out.println("Directory: " + strDirectoy + " created");
+				    } 
 					String fileName = new File(item.getName()).getName();
-					String filePath = "c:\\FicherAdmission\\" + fileName +"_" + prenom;
+					String filePath = strDirectoy+"\\" + fileName;
+					
 					File storeFile = new File(filePath);
 					// saves the file on disk
 					item.write(storeFile);	
 				}
 
 			}
-			ajouterDossierEtudiant(prenom, nom, courriel, choix_programmes, choix_sessions );
+			
 			reussi = true;
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block

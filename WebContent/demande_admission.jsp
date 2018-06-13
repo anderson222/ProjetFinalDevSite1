@@ -7,9 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Page Demande Admission</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
+	<div id="container">
 	<h1>Demande d'admission</h1>
 
 	<p> Ultricies eget, tempor sit amet, ante. <br>Donec eu libero sit amet
@@ -25,18 +29,18 @@
 
 	<br>
 
-	<form action="SoumettreDossierEtudiantServlet" enctype="multipart/form-data" method="post" >
+	<form  method="post" >
 	
 		Prénom <br>
-		<input type="text" name="champ_prenom" /> <br> 
+		<input type="text" name="champ_prenom" id="pour_prenom" /> <br> 
 		<br>
 		
 		Nom <br>
-		<input type="text" name="champ_nom" /> <br> 
+		<input type="text" name="champ_nom" id="pour_nom" /> <br> 
 		<br>
 		
 		Courriel <br>
-		<input type="email" name="champ_courriel" /> <br>
+		<input type="email" name="champ_courriel" id="pour_courriel" /> <br>
 		<br>
 
 		<h3>Programme d'inscription</h3>
@@ -53,18 +57,30 @@
 		<c:out value="${session['description']}"/> <input type="checkbox" name="choix_session" value="<c:out value="${session['description']}"/>"/>
 		<br>
 		</c:forEach>
-		<br> 
-		
-		<br> 	
-		 <input type="file" name="files"  multiple >
-		<br>
-		<br>
-		<br>
+		<br> 		
 		<br>
 		
-		<input type="submit" value="Soumettre" />
+		<div class="row files" id="files1">
+                
+                <span class="btn btn-default btn-file">
+                    Televerse tes fichiers d'admission:  <input type="file" name="files1" multiple />
+                </span>
+                <br />
+                <ul class="fileList"></ul>
+        </div> 	
+		<br>
+		<br>
+		
+		
+		
+			<input type="submit" id="uploadBtn" value="Soumettre" />
+		
 		
 	</form>
-
+	</div>
+	<div id="result">
+	</div>
+	
+<script type="text/javascript" src="import.js"></script>
 </body>
 </html>

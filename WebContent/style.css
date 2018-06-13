@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+body{
+	justify-content: center;
+}
+.removeFile{
+	color: red;
+}
+
+.fileList{
+	background-color: gray;
+	border: 1px solid blue;
+	width: 750px;
+	align-content: center;
+}
+
+input[type="submit"]{
+	background-color: #9f6c60;
+	width: 450px;
+}
+
+.mesLi{
+	list-style-type: none;
+	background-color: gray;
+	color: #eeeee6;
+	
+}
+#myButton{
+	width: 100px;
+	background-color: red;
+	display: inline;
+}
