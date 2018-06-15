@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -9,7 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import action.*;
+
+import action.DossierEtudiantAction;
 
 /**
  * Servlet implementation class SoumettreDossierEtudiantServlet
@@ -35,17 +35,12 @@ public class SoumettreDossierEtudiantServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String	urlRetour="demande_admission.jsp";
+		String	urlRetour="AfficherProgrammeSessionServlet";
 	
-		if(DossierEtudiantAction.creeDossierEtudiantConnecte(request, response)){
-						
+		if(DossierEtudiantAction.creeDossierEtudiantConnecte(request, response)){				
 			urlRetour="confirmation.jsp";		
-			
-		}else{
-			
-		}
 		
 		request.getRequestDispatcher(urlRetour).forward(request, response);
 		}
-
+	}
 }

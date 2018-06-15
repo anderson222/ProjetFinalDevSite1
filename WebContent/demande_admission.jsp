@@ -6,81 +6,106 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--<link rel="shortcut icon" href="PUT YOUR FAVICON HERE">-->
+
+<!-- Google Web Font Embed -->
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+	rel='stylesheet' type='text/css'>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css'>
+
+<!-- Custom styles for this template -->
+<link href="js/colorbox/colorbox.css" rel='stylesheet' type='text/css'>
+<link href="css/templatemo_style.css" rel='stylesheet' type='text/css'>
+
+
+
+
 <title>Page Demande Admission</title>
 <link rel="stylesheet" type="text/css" href="style.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
+
+	<div class="templatemo-top-bar" id="templatemo-top">
+		<div class="container">
+			<div class="subheader">
+				<div id="phone" class="pull-left">
+					<img id="logo" src="images/isimtlLogo.png" alt="phone" />
+				</div>
+			</div>
+		</div>
+	</div>
 	<div id="container">
-	<h1>Demande d'admission</h1>
+		<h1>Demande d'admission</h1>
 
-	<p> Ultricies eget, tempor sit amet, ante. <br>Donec eu libero sit amet
-		quam egestas semper. Aenean ultricies mi vitae est. <br>Mauris placerat
-		eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.
-		Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet,
-		wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum
-		rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in
-		turpis pulvinar facilisis. Ut felis. <br>Praesent dapibus, neque id cursus
-		faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.<br>
-		Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor,
-		facilisis luctus, metus </p>
+		<p>
+			Ultricies eget, tempor sit amet, ante. <br>Donec eu libero sit
+			amet quam egestas semper. Aenean ultricies mi vitae est. <br>Mauris
+			placerat eleifend leo. Quisque sit amet est et sapien ullamcorper
+			pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae,
+			ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt
+			condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac
+			dui. Donec non enim in turpis pulvinar facilisis. Ut felis. <br>Praesent
+			dapibus, neque id cursus faucibus, tortor neque egestas augue, eu
+			vulputate magna eros eu erat.<br> Aliquam erat volutpat. Nam dui
+			mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+		</p>
 
-	<br>
-
-	<form  method="post" >
-	
-		Prénom <br>
-		<input type="text" name="champ_prenom" id="pour_prenom" /> <br> 
-		<br>
-		
-		Nom <br>
-		<input type="text" name="champ_nom" id="pour_nom" /> <br> 
-		<br>
-		
-		Courriel <br>
-		<input type="email" name="champ_courriel" id="pour_courriel" /> <br>
 		<br>
 
-		<h3>Programme d'inscription</h3>
-		
-		<c:forEach items="${liste_programmes}" var="prog">
-		<c:out value="${prog['description']}"/> <input type="checkbox" name="choix_programme" value="<c:out value="${prog['description']}"/>"/>
-		<br>
-		</c:forEach>
-		<br>
+		<form method="post">
 
-		<h3>Session</h3>
-		
-		<c:forEach items="${liste_sessions}" var="session">
-		<c:out value="${session['description']}"/> <input type="checkbox" name="choix_session" value="<c:out value="${session['description']}"/>"/>
-		<br>
-		</c:forEach>
-		<br> 		
-		<br>
-		
-		<div class="row files" id="files1">
-                
-                <span class="btn btn-default btn-file">
-                    Televerse tes fichiers d'admission:  <input type="file" name="files1" multiple />
-                </span>
-                <br />
-                <ul class="fileList"></ul>
-        </div> 	
-		<br>
-		<br>
-		
-		
-		
-			<input type="submit" id="uploadBtn" value="Soumettre" />
-		
-		
-	</form>
+			Prénom <br> <input type="text" name="champ_prenom"
+				id="pour_prenom" /> <br> <br> Nom <br> <input
+				type="text" name="champ_nom" id="pour_nom" /> <br> <br>
+
+			Courriel <br> <input type="email" name="champ_courriel"
+				id="pour_courriel" /> <br> <br>
+
+			<h3>Programme d'inscription</h3>
+
+			<c:forEach items="${liste_programmes}" var="prog">
+				<c:out value="${prog['description']}" />
+				<input type="checkbox" name="choix_programme"
+					value="<c:out value="${prog['description']}"/>" />
+				<br>
+			</c:forEach>
+			<br>
+
+			<h3>Session</h3>
+
+			<c:forEach items="${liste_sessions}" var="session">
+				<c:out value="${session['description']}" />
+				<input type="checkbox" name="choix_session"
+					value="<c:out value="${session['description']}"/>" />
+				<br>
+			</c:forEach>
+			<br> <br>
+
+			<div class="row files" id="files1">
+
+				<span class="btn btn-default btn-file"> Televerse tes
+					fichiers d'admission: <input type="file" name="files1"
+					accept=".pdf,.jpeg, .jpg" multiple />
+				</span> <br />
+				<ul class="fileList"></ul>
+			</div>
+			<br> <br> <input type="submit" id="uploadBtn"
+				value="Soumettre" />
+
+
+		</form>
 	</div>
-	<div id="result">
-	</div>
-	
-<script type="text/javascript" src="import.js"></script>
+	<div id="result"></div>
+
+	<script type="text/javascript" src="import.js"></script>
 </body>
 </html>

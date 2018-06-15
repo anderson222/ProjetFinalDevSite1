@@ -23,6 +23,7 @@ input[type="submit"]{
 	list-style-type: none;
 	background-color: gray;
 	color: #eeeee6;
+	margin-bottom: 10px;
 	
 }
 #myButton{

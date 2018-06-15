@@ -2,10 +2,7 @@ package action;
 
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,11 +24,12 @@ public class DossierEtudiantAction {
 	private static String prenom = null;
 	private static String nom = null;
 	private static String courriel = null;
-	private static final String ADMISSION=DossierContenant.Admission.toString();
-	private static final String CATEGORIE=Categories.Autre.toString();
+	private static final String dossier_admission="admission";
+	private static final String ADMISSION=DossierContenant.Admission.toString().toLowerCase();
+	private static final String CATEGORIE=Categories.DossierScolaire.toString().toLowerCase();
 	private static final String FORMAT ="format";
-	private static Date dateDepotFichier=null;
-	private static ArrayList<String>pathDossierAdmission=new ArrayList<>();
+	private static java.sql.Timestamp date = null;
+	private static ArrayList<String>pathDossierAdmission=null;
 
 	public static boolean creeDossierEtudiantConnecte(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
@@ -40,7 +38,7 @@ public class DossierEtudiantAction {
 		boolean cree = true;
 		choix_programmes = new ArrayList<String>();
 		choix_sessions = new ArrayList<String>();
-
+		pathDossierAdmission = new ArrayList<String>();
 
 		ServletFileUpload sfu = new ServletFileUpload(new DiskFileItemFactory());
 		try {
@@ -80,7 +78,7 @@ public class DossierEtudiantAction {
 						ajouterDossierEtudiant(prenom, nom, courriel, choix_programmes, choix_sessions );
 						cree = false;
 					}
-					String strDirectoy ="c:\\dossiers_etudiants_etrangers\\"+prenom+"_"+nom+"_"+DossierEtudiantManager.id_etudiant+"\\"+ADMISSION;
+					String strDirectoy ="c:\\dossiers_etudiants_etrangers\\"+prenom+"_"+nom+"_"+DossierEtudiantManager.id_etudiant+"\\"+dossier_admission+"\\"+CATEGORIE;
 					// Create one directory
 					boolean success = (new File(strDirectoy)).mkdirs();
 					if (success) {
@@ -110,11 +108,12 @@ public class DossierEtudiantAction {
 					File storeFile = new File(filePath);
 					// saves the file on disk
 					item.write(storeFile);	
+					date = new java.sql.Timestamp(new java.util.Date().getTime());
 				}
 
 			}
 
-			AjouterFichierAction.ajouterFichier(DossierEtudiantManager.id_etudiant, pathDossierAdmission, ADMISSION, CATEGORIE, FORMAT);
+			AjouterFichierAction.ajouterFichier(DossierEtudiantManager.id_etudiant, pathDossierAdmission, ADMISSION, CATEGORIE, FORMAT, date);
 
 			reussi = true;
 		} catch (FileUploadException e) {
@@ -127,9 +126,9 @@ public class DossierEtudiantAction {
 		return reussi;
 	}
 
-	public static void ajouterDossierEtudiant(String prenomParam,String nomParam,String courrielParam, List<String>Choix_programmesParam, List<String>choix_sessionsParam){
+	public static void ajouterDossierEtudiant(String prenomParam,String nomParam,String courrielParam, List<String>choix_programmesParam, List<String>choix_sessionsParam){
 		DossierEtudiantManager.ajouterDossierEtudiant(prenomParam, nomParam, courrielParam);
-		AjouterProgrammeSessionAction.ajouterChoixProgramme(Choix_programmesParam);
+		AjouterProgrammeSessionAction.ajouterChoixProgramme(choix_programmesParam);
 		AjouterProgrammeSessionAction.ajouterChoixSession(choix_sessionsParam);
 	}
 

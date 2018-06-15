@@ -19,7 +19,7 @@ public class DossierEtudiantManager {
 
 	/************* Queries *********/
 	private static String queryAjouterDossierEtudiant = "insert into dossier_etudiant (prenom, nom, courriel) values (?, ?, ?);";
-	private static String queryAjouterFichier = "insert into fichier (id_dossier_etudiant, path, dossier_contenant, categorie,format) values (?, ?, ?,?, ?);";
+	private static String queryAjouterFichier = "insert into fichier (id_dossier_etudiant, path, dossier_contenant, categorie,format, date) values (?, ?, ?,?, ?, ?);";
 
 
 	/************ Fonctions ***************/
@@ -50,23 +50,23 @@ public class DossierEtudiantManager {
 			e.printStackTrace();
 		}
 	}
-
-	public static void ajouterFichier(int id_dossier_etudiant, ArrayList<String> path,String dossier_contenant,String categorie,String format) {
+	public static void ajouterFichier(int id_dossier_etudiant, ArrayList<String> path,String dossier_contenant,String categorie,String format, java.sql.Timestamp date ) {
 		PreparedStatement ps=ConnecteurBD.getPs(queryAjouterFichier);
 
 		try {
 			
 			
-			for (String item : path) {
+			for (int i = 0; i < path.size(); i++) {
 				ps.setInt(1, id_dossier_etudiant);
-				ps.setString(2, item);
+				ps.setString(2, path.get(i));
 				ps.setString(3, dossier_contenant);
 				ps.setString(4, categorie);
 				ps.setString(5, format);
-				//ps.setDate(6,date);
+				ps.setTimestamp(6, date);
+				ps.executeUpdate();
 			}
 		
-			ps.executeUpdate();
+			
 
 			
 			ps.close();

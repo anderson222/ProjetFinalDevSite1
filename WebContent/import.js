@@ -16,7 +16,7 @@ $.fn.fileUploader = function (filesToUpload, sectionIdentifier) {
 
             var removeLink = "<a class=\"removeFile\" href=\"#\" data-fileid=\"" + fileId + "\"><button id=\"myButton\">Remove</button></a>";
 
-            output.push("<li class=\"mesLi\"><strong class=\"mesLi\">", escape(file.name), "</strong> - ", file.size, " bytes. &nbsp; &nbsp; ", removeLink, "</li> ");
+            output.push("<li class=\"mesLi\"><strong class=\"mesLi\">", file.name, "</strong> - ", file.size, " bytes. ", removeLink, "</li> ");
         };
 
         $(this).children(".fileList")
@@ -103,7 +103,7 @@ $.fn.fileUploader = function (filesToUpload, sectionIdentifier) {
         	 $.ajax({
              	type: "POST",
                  enctype: 'multipart/form-data',
-                 url: "http://localhost:8080/Projet/SoumettreDossierEtudiantServlet",
+                 url: "http://localhost:8080/ProjetFinalDevSite1/SoumettreDossierEtudiantServlet",
                  data: formData,
                  processData: false,
                  contentType: false,
